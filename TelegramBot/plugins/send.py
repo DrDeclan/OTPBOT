@@ -4,7 +4,6 @@ import requests
 from config import vars
 
 def send_message(number, message):
-    base_url = 'http://enterprise.smsgupshup.com/GatewayAPI/rest?method=sendMessage'
     params = {
         'send_to':number,
         'msg': f'{message} is your CollegeSearch Mobile Verification OTP',
@@ -15,7 +14,8 @@ def send_message(number, message):
         'auth_scheme':'PLAIN'
             }
     if len(message) <= vars.max:
-        result = requests.get(base_url, params=params) 
+        base_url = 'http://enterprise.smsgupshup.com/GatewayAPI/rest?method=sendMessage'
+        result = requests.get(base_url, params=params)
         result_text = result.text
         status_code = result.status_code
     else:
